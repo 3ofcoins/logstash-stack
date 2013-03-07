@@ -1,0 +1,15 @@
+--- grok-1.20110630.1.orig/Makefile	2011-06-16 03:30:03.000000000 +0000
++++ grok-1.20110630.1/Makefile	2013-03-07 10:35:51.877144251 +0000
+@@ -162,10 +162,10 @@
+ # Binary creation
+ grok: LDFLAGS+=-levent
+ grok: $(GROKOBJ) conf.tab.o conf.yy.o main.o grok_config.o
+-	gcc $(LDFLAGS) $^ -o $@
++	gcc $^ $(LDFLAGS) -o $@
+ 
+ discogrok: $(GROKOBJ) discover_main.o
+-	gcc $(LDFLAGS) $^ -o $@
++	gcc $^ $(LDFLAGS) -o $@
+ 
+ libgrok.$(LIBSUFFIX): 
+ libgrok.$(LIBSUFFIX): $(GROKOBJ) 
