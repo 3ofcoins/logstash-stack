@@ -63,7 +63,7 @@ package do
           --depends grok \\
           --depends 'java7-runtime-headless | java6-runtime-headless | java7-runtime | java6-runtime' \\
           --deb-user root --deb-group root \
-          --prefix /usr/lib/vagrant #{logstash_jar}
+          --prefix /usr/lib/logstash #{logstash_jar}
 EOF
   end
 end
