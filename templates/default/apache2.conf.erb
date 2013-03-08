@@ -1,0 +1,16 @@
+# -*- conf -*-
+
+<VirtualHost *:80>
+  ServerName      <%= node['logstash_stack']['web']['domain'] %>
+  CustomLog       <%= node['apache']['log_dir'] %>/logstash_access.log combined
+  ErrorLog        <%= node['apache']['log_dir'] %>/logstash_error.log
+
+  DocumentRoot    /var/empty
+
+  ProxyPass / http://127.0.0.1:9292/
+
+  <Proxy http://127.0.0.1:9292/>
+    Order allow,deny
+    Allow from all
+  </Proxy>
+</VirtualHost>

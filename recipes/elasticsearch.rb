@@ -52,3 +52,5 @@ http_request 'elasticsearch::template_logstash' do
           :@type        => { :type => "string", :index => "not_analyzed" }
         }}})
 end
+
+tag 'logstash-elasticsearch'
