@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
-
+cd /srv/logstash
 exec 2>&1
 exec chpst -u logstash \
-    java -jar /usr/lib/logstash/logstash.jar \
+    java <%= node['logstash_stack']['indexer']['java_opts'] %> \
+    -jar /usr/lib/logstash/logstash.jar \
     agent -f /srv/logstash/indexer.conf

@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
-
+cd /srv/logstash
 exec 2>&1
 exec chpst -u logstash \
-    java -jar /usr/lib/logstash/logstash.jar \
-    web --backend elasticsearch://<%= @elasticsearch %>/logstash
+    java <%= node['logstash_stack']['web']['java_opts'] %> \
+    -jar /usr/lib/logstash/logstash.jar \
+    web --backend elasticsearch://<%= @options[:elasticsearch] %>/logstash
