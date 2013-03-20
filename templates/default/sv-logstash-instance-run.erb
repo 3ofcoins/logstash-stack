@@ -3,6 +3,7 @@ set -e
 cd /srv/logstash
 exec 2>&1
 exec chpst -u logstash \
-    java <%= node['logstash_stack']['indexer']['java_opts'] %> \
+    java <%= @options[:java_opts] %> \
     -jar /usr/lib/logstash/logstash.jar \
-    agent -f /srv/logstash/indexer.conf
+    agent \
+    -f /srv/logstash/<%= @options[:name] %>.conf.d

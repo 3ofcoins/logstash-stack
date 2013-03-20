@@ -10,14 +10,10 @@ redis_ip = es_ip = tagged?('logstash-redis') ? '127.0.0.1' :
     "tags:logstash-redis AND chef_environment:#{node.chef_environment}"
   ).first['ipaddress']
 
-template '/srv/logstash/indexer.conf' do
-  owner 'root'
-  group 'logstash'
-  mode 0640
-  variables :elasticsearch => elasticsearch_ip, :redis => redis_ip
-  notifies :restart, 'runit_service[logstash-indexer]'
-end
+logstash_instance 'indexer'
 
-runit_service 'logstash-indexer' do
-  default_logger true
+logstash_conf '99-default' do
+  instance 'indexer'
+  source 'indexer.conf.erb'
+  variables :elasticsearch => elasticsearch_ip, :redis => redis_ip
 end
