@@ -1,8 +1,10 @@
-# CHANGELOG for logstash
+CHANGELOG for logstash
+======================
 
 This file is used to list changes made in each version of logstash.
 
-## 0.1.0:
+0.1.0
+-----
 
 * Initial release of logstash
 
