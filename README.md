@@ -14,7 +14,6 @@ packages can be built using a Rake script in the `packages/`
 subdirectory:
 
     $ bundle install
-    $ cd packages/
     $ bundle exec rake
 
 These packages should be either preinstalled by another cookbook, or

@@ -27,4 +27,5 @@
 include_recipe 'logstash-stack::elasticsearch'
 include_recipe 'logstash-stack::redis'
 include_recipe 'logstash-stack::indexer'
-include_recipe 'logstash-stack::web'
+include_recipe 'kibana'
+include_recipe 'kibana::apache'

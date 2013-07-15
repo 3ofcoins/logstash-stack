@@ -40,11 +40,11 @@ package do
     "http://semicomplete.googlecode.com/files/grok-#{GROK_VERSION}.tar.gz",
     :checksum => GROK_CHECKSUM)
 
-  file "grok_#{GROK_VERSION}_#{ARCH}.deb" => [grok_src, "grok-Makefile.patch"] do
+  file "grok_#{GROK_VERSION}_#{ARCH}.deb" => [grok_src, "files/package/grok-Makefile.patch"] do
     rm_rf "grok-#{GROK_VERSION}"
     sh "tar -xzf #{grok_src}"
     chdir "grok-#{GROK_VERSION}" do
-      sh "patch -p1 < ../grok-Makefile.patch"
+      sh "patch -p1 < ../files/package/grok-Makefile.patch"
       sh "make package-debian"
     end
   end

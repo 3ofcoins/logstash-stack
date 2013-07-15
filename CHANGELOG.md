@@ -3,6 +3,12 @@ CHANGELOG for logstash
 
 This file is used to list changes made in each version of logstash.
 
+0.2.0
+-----
+
+* Use Kibana rather than logstash-web
+* Move package Rakefile to root
+
 0.1.0
 -----
 
