@@ -1,11 +1,11 @@
-LOGSTASH_VERSION = '1.1.9'
-LOGSTASH_CHECKSUM = 'e444e89a90583a75c2d6539e5222e2803621baa0ae94cb77dbbcebacdc0c3fc7'
+LOGSTASH_VERSION = '1.2.2'
+LOGSTASH_CHECKSUM = '6b0974eed6814f479b68259b690e8c27ecbca2817b708c8ef2a11ce082b1183c'
 
-GROK_VERSION = '1.20110630.1'
-GROK_CHECKSUM = 'a37f221824df11df75443150641aee2ad9b539de124a6dc939facd2753cac96f'
+GROK_VERSION = '1.20110708.1'
+GROK_CHECKSUM = '3362857a03115029df76c3a3f0587b2ed1f9977f963bb1bd701e2bf59ad701c8'
 
-ELASTICSEARCH_VERSION  = '0.20.2'
-ELASTICSEARCH_CHECKSUM = '065a93e2f73f41d84d4b811ca9baf40fce26130099b7dec9b4bb746d553b14b5'
+ELASTICSEARCH_VERSION  = '0.90.3'
+ELASTICSEARCH_CHECKSUM = '5584c1120b38cdc647cf8b2af306b54391ec7a63472ab72868f2b724674a0fe2'
 
 BUILD_REQUIRES = [
   # grok
@@ -40,11 +40,11 @@ package do
     "http://semicomplete.googlecode.com/files/grok-#{GROK_VERSION}.tar.gz",
     :checksum => GROK_CHECKSUM)
 
-  file "grok_#{GROK_VERSION}_#{ARCH}.deb" => [grok_src, "files/package/grok-Makefile.patch"] do
+  file "grok_#{GROK_VERSION}_#{ARCH}.deb" => [grok_src, "grok-Makefile.patch"] do
     rm_rf "grok-#{GROK_VERSION}"
     sh "tar -xzf #{grok_src}"
     chdir "grok-#{GROK_VERSION}" do
-      sh "patch -p1 < ../files/package/grok-Makefile.patch"
+      sh "patch -p1 < ../grok-Makefile.patch"
       sh "make package-debian"
     end
   end
@@ -52,7 +52,7 @@ end
 
 package do
   logstash_jar = Evoker::cached_wget(
-    "https://logstash.objects.dreamhost.com/release/logstash-#{LOGSTASH_VERSION}-monolithic.jar",
+    "https://download.elasticsearch.org/logstash/logstash/logstash-#{LOGSTASH_VERSION}-flat.jar",
     :output_file => 'logstash.jar',
     :checksum => LOGSTASH_CHECKSUM)
 
