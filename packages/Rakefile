@@ -6,6 +6,7 @@ GROK_CHECKSUM = '3362857a03115029df76c3a3f0587b2ed1f9977f963bb1bd701e2bf59ad701c
 
 ELASTICSEARCH_VERSION  = '0.90.3'
 ELASTICSEARCH_CHECKSUM = '5584c1120b38cdc647cf8b2af306b54391ec7a63472ab72868f2b724674a0fe2'
+ELASTICSEARCH_DEB = "elasticsearch_#{ELASTICSEARCH_VERSION}_all.deb"
 
 BUILD_REQUIRES = [
   # grok
@@ -32,6 +33,7 @@ end
 package do
   Evoker::cached_wget(
     "https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-#{ELASTICSEARCH_VERSION}.deb",
+    :output_file => ELASTICSEARCH_DEB,
     :checksum => ELASTICSEARCH_CHECKSUM)
 end
 
