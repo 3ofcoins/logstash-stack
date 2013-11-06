@@ -8,7 +8,7 @@ This file is used to list changes made in each version of logstash.
 
 * Bump to logstash 1.2.2 / elasticsearch 0.90.3
 * Bring back packages/ dir
-* [WIP] Kibana 3 proxied by Apache
+* Kibana 3 proxied by Apache
 
 0.2.0
 -----
