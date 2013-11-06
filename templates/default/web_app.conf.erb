@@ -1,0 +1,45 @@
+# -*- conf -*-
+
+<VirtualHost *:80>
+<% if node['logstash_stack']['kibana3']['ssl_key_path'] -%>
+  ServerName      <%= node['logstash_stack']['kibana3']['domain'] %>
+  CustomLog       <%= node['apache']['log_dir'] %>/logstash_access.log combined
+  ErrorLog        <%= node['apache']['log_dir'] %>/logstash_error.log
+
+  DocumentRoot    /opt/kibana/current
+
+  RewriteEngine On
+  RewriteRule ^/?(.*)$ https://<%= node['logstash_stack']['kibana3']['domain'] %>/$1 [L,R=301]
+</VirtualHost>
+
+<VirtualHost *:443>
+  SSLEngine on
+  SSLCertificateFile <%= node['logstash_stack']['kibana3']['ssl_certificate_path'] %>
+<% if node['logstash_stack']['kibana3']['ssl_certificate_chain_path'] -%>
+  SSLCertificateChainFile <%= node['logstash_stack']['kibana3']['ssl_certificate_chain_path'] %>
+<% end -%>
+  SSLCertificateKeyFile <%= node['logstash_stack']['kibana3']['ssl_key_path'] %>
+
+<% end -%>
+  ServerName      <%= node['logstash_stack']['kibana3']['domain'] %>
+  CustomLog       <%= node['apache']['log_dir'] %>/logstash_access.log combined
+  ErrorLog        <%= node['apache']['log_dir'] %>/logstash_error.log
+
+  DocumentRoot    /opt/kibana/current
+
+<% if node['logstash_stack']['kibana3']['apache2_custom'] -%>
+  <%= node['logstash_stack']['kibana3']['apache2_custom'] %>
+<% end -%>
+
+  RewriteEngine On
+  RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+  RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME}/index.html !-f
+  RewriteRule ^/(.*)$ <%= node['logstash_stack']['kibana3']['elasticsearch'].sub(/\/$/,'') %>%{REQUEST_URI} [P,QSA,L]
+
+  # ProxyPass / http://127.0.0.1:9200/
+
+  <Proxy <%= node['logstash_stack']['kibana3']['elasticsearch'] %>>
+    Order allow,deny
+    Allow from all
+  </Proxy>
+</VirtualHost>

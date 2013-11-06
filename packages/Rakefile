@@ -52,7 +52,7 @@ end
 
 package do
   logstash_jar = Evoker::cached_wget(
-    "https://download.elasticsearch.org/logstash/logstash/logstash-#{LOGSTASH_VERSION}-flat.jar",
+    "https://download.elasticsearch.org/logstash/logstash/logstash-#{LOGSTASH_VERSION}-flatjar.jar",
     :output_file => 'logstash.jar',
     :checksum => LOGSTASH_CHECKSUM)
 

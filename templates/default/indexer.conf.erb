@@ -7,7 +7,7 @@ input {
     type => "redis-input"
     data_type => "list"
     key => "logstash"
-    format => "json_event"
+    codec => json
   }
 }
 
