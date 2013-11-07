@@ -1,0 +1,5 @@
+# -*- ruby -*-
+
+git 'lumberjack',
+    repository: 'https://github.com/elasticsearch/logstash-forwarder.git',
+    tag: 'v0.3.1'
