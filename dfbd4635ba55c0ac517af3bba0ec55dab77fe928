@@ -1,0 +1,16 @@
+---
+:vendorificator_version: 0.4.0
+:current_branch: master
+:current_sha: c83e2d4da154b2b9643d5728ea3cd1a35f965181
+:git_describe: 0.2.0-6-gc83e2d4
+:module_name: lumberjack
+:module_version: v0.3.1
+:module_group:
+:unparsed_args:
+  :repository: https://github.com/elasticsearch/logstash-forwarder.git
+  :tag: v0.3.1
+:parsed_args:
+  :repository: https://github.com/elasticsearch/logstash-forwarder.git
+  :tag: v0.3.1
+  :version: v0.3.1
+:git_revision: f3ba3dd954dbdfa4e9a0e421e673848f67387cdd
