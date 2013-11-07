@@ -8,6 +8,10 @@ ELASTICSEARCH_VERSION  = '0.90.3'
 ELASTICSEARCH_CHECKSUM = '5584c1120b38cdc647cf8b2af306b54391ec7a63472ab72868f2b724674a0fe2'
 ELASTICSEARCH_DEB = "elasticsearch_#{ELASTICSEARCH_VERSION}_all.deb"
 
+LUMBERJACK_VERSION = File.open('../vendor/lumberjack/Makefile').
+  lines.grep(/^\s*VERSION\s*=/).first.
+  sub(/^\s*VERSION=/, '').strip
+
 BUILD_REQUIRES = [
   # grok
   'dh-make', 'devscripts', 'ctags', 'gperf', 'libevent-dev',
@@ -70,3 +74,9 @@ EOF
   end
 end
 
+package do
+  file "lumberjack_#{LUMBERJACK_VERSION}_#{ARCH}.deb" do |t|
+    sh 'make -C ../vendor/lumberjack deb'
+    cp "../vendor/lumberjack/#{t} ."
+  end
+end
