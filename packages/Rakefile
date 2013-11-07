@@ -77,6 +77,6 @@ end
 package do
   file "lumberjack_#{LUMBERJACK_VERSION}_#{ARCH}.deb" do |t|
     sh 'make -C ../vendor/lumberjack deb'
-    cp "../vendor/lumberjack/#{t} ."
+    cp "../vendor/lumberjack/#{t}",  "."
   end
 end
