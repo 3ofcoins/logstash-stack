@@ -18,6 +18,9 @@ execute 'generate lumberjack key' do
   command "openssl req -x509 -newkey rsa:2048 -keyout /srv/logstash/indexer-lumberjack.key -out /srv/logstash/indexer-lumberjack.pub -nodes -days 3650 -subj /CN=#{node['fqdn']}"
   creates '/srv/logstash/indexer-lumberjack.key'
   only_if { node['logstash']['indexer']['input']['lumberjack'] }
+  user 'root'
+  group 'logstash'
+  umask '0027'
 end
 
 ruby_block 'save lumberjack key' do
