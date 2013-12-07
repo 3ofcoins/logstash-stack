@@ -13,8 +13,6 @@ default['logstash_stack']['kibana3']['apache2_custom'] = nil
 
 default['logstash']['default']['java_opts'] = '-server -Djava.awt.headless=true -Xmx512M -Xms128M'
 
-default['logstash']['shipper']['java_opts'] = '-server -Djava.awt.headless=true -Xmx32M -Xms4M'
-
 default['logstash']['indexer']['input']['50-redis']['template'] = 'logstash-input-redis.conf.erb'
 default['logstash']['indexer']['input']['50-redis']['cookbook'] = 'logstash-stack'
 default['logstash']['indexer']['input']['50-redis']['variables']['host'] = '127.0.0.1'
@@ -33,3 +31,11 @@ default['logstash']['indexer']['filter']['50-syslog']['cookbook'] = 'logstash-st
 default['logstash']['indexer']['output']['50-elasticsearch']['template'] = 'logstash-output-elasticsearch.conf.erb'
 default['logstash']['indexer']['output']['50-elasticsearch']['cookbook'] = 'logstash-stack'
 default['logstash']['indexer']['output']['50-elasticsearch']['variables']['host'] = '127.0.0.1'
+
+default['logstash']['shipper']['java_opts'] = '-server -Djava.awt.headless=true -Xmx32M -Xms4M'
+default['logstash']['shipper']['rsyslog'] = true
+default['logstash']['shipper']['lumberjack'] = {}
+
+default['logstash']['shipper']['output']['50-lumberjack']['template'] = 'logstash-output-lumberjack.conf.erb'
+default['logstash']['shipper']['output']['50-lumberjack']['cookbook'] = 'logstash-stack'
+

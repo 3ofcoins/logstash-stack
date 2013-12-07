@@ -31,3 +31,5 @@ ruby_block 'save lumberjack key' do
 end
 
 logstash_agent 'indexer'
+
+tag 'logstash-indexer'

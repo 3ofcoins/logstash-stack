@@ -76,6 +76,28 @@ Elasticsearch.
 
 Installs Kibana 3 served by Apache
 
+### logstash_stack::shipper
+
+Configures machine as a Logstash shipper that ships to the indexer
+instance (one that runs `logstash_stack::indexer` recipe).
+
+If the indexer is configured with syslog input, and
+`node['logstash']['shipper']['rsyslog']` is true (default), then
+rsyslog is configured to ship all events to the Logstash indexer.
+
+If the indexer is configured with lumberjack input, and there are
+entries configured in `node['logstash']['shipper']['lumberjack']`,
+then Lumberjack is installed and configured to send events to the
+indexer.
+
+Finally, if any input is configured in
+`node['logstash']['shipper']['input']`, then a Logstash agent named
+`shipper` is configured to ship events to the indexer using the
+`lumberjack` protocol.
+
+The templates used in shipper's config can use `@params[:indexer]` to
+access indexer's Node instance.
+
 Logstash Agent Configuration
 -------------------------------
 
