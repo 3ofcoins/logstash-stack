@@ -6,4 +6,4 @@ exec chpst -u logstash \
     java <%= @options[:java_opts] %> \
     -jar /usr/lib/logstash/logstash.jar \
     agent \
-    -f /srv/logstash/<%= @options[:name] %>.conf.d
+    -f /srv/logstash/<%= @options[:name] %>.conf

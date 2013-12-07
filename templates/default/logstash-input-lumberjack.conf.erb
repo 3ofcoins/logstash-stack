@@ -1,0 +1,6 @@
+lumberjack {
+  port => <%= @port %>
+  ssl_certificate => "/srv/logstash/<%= @agent %>-lumberjack.pub"
+  ssl_key => "/srv/logstash/<%= @agent %>-lumberjack.key"
+  type => "lumberjack"
+}  

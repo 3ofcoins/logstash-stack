@@ -1,0 +1,34 @@
+# -*- conf -*-
+# Created by Chef. Edits are futile.
+<% %w[input filter output].each do |section| -%>
+
+<%= section %> {
+
+<%   Array(node['logstash'][@agent][section]).sort.each do |name, snippet| -%>
+#v+ <%= section %>/<%= name %>
+<%=
+       case snippet
+       when nil, false then '# (disabled)'
+       when String then snippet
+       when Hash
+         if snippet['template']
+           opts = JSON::load(JSON::dump(snippet.to_hash))
+           template_name = opts.delete 'template'
+           opts = Hash[ opts.map { |k,v| [k.to_sym, v] } ]
+           opts[:variables] = Hash[ opts[:variables].map { |k,v| [k.to_sym, v] } ] if opts[:variables]
+           opts[:variables] ||= {}
+           opts[:variables][:agent] = @agent   
+           opts[:variables][:params] = @params   
+           render template_name, opts
+         else
+           Chef::Log.warn "Logstash #{@agent} #{section} #{name} doesn't specify template; ignoring."
+         end
+       else
+         raise "Don't know what to do for logstash #{@agent} #{section} #{name} with #{snippet.inspect}"
+       end
+-%>
+#v- <%= section %>/<%= name %>
+
+<%   end -%>
+} # <%= section %>
+<% end -%>

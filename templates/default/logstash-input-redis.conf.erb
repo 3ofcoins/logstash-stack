@@ -1,0 +1,7 @@
+redis {
+  host => "<%= @host %>"
+  type => "redis-input"
+  data_type => "list"
+  key => "logstash"
+  codec => json
+}

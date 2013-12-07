@@ -3,6 +3,17 @@ CHANGELOG for logstash
 
 This file is used to list changes made in each version of logstash.
 
+0.4.0
+-----
+
+* Renamed `logstash_instance` to `logstash_agent`
+* Use dictionary-based single-file instance configuration rather than including
+  directory; single file configuration is more
+  predictable. `logstash_config` definition has been obviously
+  deleted.
+* Updated documentation
+* Added separate LICENSE and CONTRIBUTING.md files
+
 0.3.0
 -----
 
