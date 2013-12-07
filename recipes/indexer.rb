@@ -1,14 +1,14 @@
 include_recipe 'logstash-stack::_common'
 
 unless tagged?('logstash-elasticsearch')
-  node.set['logstash']['indexer']['output']['50-elasticsearch']['variables']['host'] =
+  node.override['logstash']['indexer']['output']['50-elasticsearch']['variables']['host'] =
     search(:node,
     "tags:logstash-elasticsearch AND chef_environment:#{node.chef_environment}"
     ).first['ipaddress']
 end
 
 unless tagged?('logstash-redis')
-  node.set['logstash']['indexer']['input']['50-redis']['variables']['host'] =
+  node.override['logstash']['indexer']['input']['50-redis']['variables']['host'] =
     search(:node,
     "tags:logstash-elasticsearch AND chef_environment:#{node.chef_environment}"
     ).first['ipaddress']
@@ -25,7 +25,7 @@ end
 
 ruby_block 'save lumberjack key' do
   block do
-    node.set['logstash_stack']['lumberjack']['public_key'] = File.read('/srv/logstash/indexer-lumberjack.pub')
+    node.override['logstash']['indexer']['lumberjack']['public_key'] = File.read('/srv/logstash/indexer-lumberjack.pub')
   end
   only_if { node['logstash']['indexer']['input']['50-lumberjack'] }
 end
