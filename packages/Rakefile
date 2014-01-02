@@ -86,7 +86,7 @@ end
 ##############################################################################
 
 PYSTACHE_VERSION='0.5.3'
-ENVSTACHE_VERSION='0.1.0'
+ENVSTACHE_VERSION='0.1.1'
 
 package do
   file "python-pystache_#{PYSTACHE_VERSION}_all.deb" do

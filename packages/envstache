@@ -6,7 +6,7 @@ import pystache
 tmpl = ""
 if len(sys.argv) > 1:
     for infn in sys.argv[1:]:
-        with inf as open(infn):
+        with open(infn) as inf:
             tmpl += inf.read()
 else:
     tmpl = sys.stdin.read()
