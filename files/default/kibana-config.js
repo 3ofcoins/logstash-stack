@@ -27,6 +27,8 @@ function (Settings) {
      */
     kibana_index: "kibana-int",
 
+    default_route: '/dashboard/elasticsearch/default',
+
     /**
      * Panel modules available. Panels will only be loaded when they are defined in the
      * dashboard, but this list is used in the "add panel" interface.
