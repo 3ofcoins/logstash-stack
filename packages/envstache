@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+import os
+import sys
+import pystache
+
+tmpl = ""
+if len(sys.argv) > 1:
+    for infn in sys.argv[1:]:
+        with inf as open(infn):
+            tmpl += inf.read()
+else:
+    tmpl = sys.stdin.read()
+
+print pystache.render(tmpl, dict(os.environ))

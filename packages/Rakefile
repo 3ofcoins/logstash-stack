@@ -80,3 +80,28 @@ package do
     cp "../vendor/lumberjack/#{t}",  "."
   end
 end
+
+##
+## Helper scripts (maybe they should get their own place)
+##############################################################################
+
+PYSTACHE_VERSION='0.5.3'
+ENVSTACHE_VERSION='0.1.0'
+
+package do
+  file "python-pystache_#{PYSTACHE_VERSION}_all.deb" do
+    sh <<EOF
+fpm -s python -t deb -v 0.5.3 \\
+  --python-pip /usr/bin/pip \\
+  --depends python \\
+  --depends python-support \\
+  pystache
+EOF
+  end
+end
+
+package do
+  file "envstache_#{ENVSTACHE_VERSION}_all.deb" do
+    sh "fpm -s dir -t deb -n envstache -v #{ENVSTACHE_VERSION} -a all --depends python-pystache --prefix /usr/bin ./envstache"
+  end
+end
