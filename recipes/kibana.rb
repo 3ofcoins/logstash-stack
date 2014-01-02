@@ -14,6 +14,10 @@ ark "kibana" do
   home_dir '/opt/kibana/current'
 end
 
+cookbook_file '/opt/kibana/current/app/dashboards/default.json' do
+  source 'kibana-default.json'
+end
+
 cookbook_file '/opt/kibana/current/config.js' do
   source 'kibana-config.js'
 end
